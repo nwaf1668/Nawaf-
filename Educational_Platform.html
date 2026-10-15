@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة نواف سلمان المطيري التعليمية - الثاني متوسط</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#151c2c',
+                        cardHover: '#1c263c',
+                        gold: {
+                            400: '#f1c40f',
+                            500: '#dfa835',
+                            600: '#b8860b',
+                        }
+                    },
+                    fontFamily: {
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dfa835;
+            border-radius: 4px;
+        }
+
+        /* Gold Gradient Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2ac 0%, #dfa835 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Luxury Card Borders & Glow */
+        .luxury-card {
+            background: rgba(21, 28, 44, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(223, 168, 53, 0.25);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(223, 168, 53, 0.6);
+            box-shadow: 0 15px 35px -5px rgba(223, 168, 53, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .luxury-button {
+            background: linear-gradient(135deg, #dfa835 0%, #b8860b 100%);
+            color: #0b0f19;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(223, 168, 53, 0.3);
+        }
+
+        .luxury-button:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #dfa835 100%);
+            box-shadow: 0 6px 20px rgba(223, 168, 53, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Glowing animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .glow-effect {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-black">
+
+    <!-- Ambient Background Lighting -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none glow-effect"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none glow-effect" style="animation-delay: 2s;"></div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-darkBg shadow-lg shadow-gold-500/20">
+                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-gold-400 font-bold block">إعداد وتصميم</span>
+                        <h1 class="text-xl sm:text-2xl font-black gold-gradient-text">عمل: نواف سلمان المطيري</h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-1 bg-cardBg/60 p-1.5 rounded-2xl border border-gold-500/20">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 text-gold-400 bg-gold-500/10 border border-gold-500/30">
+                        <i class="fa-solid fa-house"></i> الرئيسية
+                    </button>
+                    <button onclick="switchTab('lessons')" id="nav-lessons" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-400 hover:text-gold-400 hover:bg-gold-500/5 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i> الدروس
+                    </button>
+                    <button onclick="switchTab('quizzes')" id="nav-quizzes" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-400 hover:text-gold-400 hover:bg-gold-500/5 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-ruler"></i> اختبارات
+                    </button>
+                    <button onclick="switchTab('ideas')" id="nav-ideas" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-400 hover:text-gold-400 hover:bg-gold-500/5 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> أفكار
+                    </button>
+                    <button onclick="switchTab('games')" id="nav-games" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold text-gray-400 hover:text-gold-400 hover:bg-gold-500/5 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad"></i> ألعاب
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-gold-400 p-2 rounded-lg bg-cardBg border border-gold-500/20">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-gold-500/20 px-4 py-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-right px-4 py-3 rounded-xl font-bold text-gold-400 bg-gold-500/10 flex items-center gap-3">
+                <i class="fa-solid fa-house"></i> الرئيسية
+            </button>
+            <button onclick="switchTab('lessons'); toggleMobileMenu()" class="w-full text-right px-4 py-3 rounded-xl font-bold text-gray-300 hover:text-gold-400 hover:bg-gold-500/5 flex items-center gap-3">
+                <i class="fa-solid fa-book-open"></i> الدروس
+            </button>
+            <button onclick="switchTab('quizzes'); toggleMobileMenu()" class="w-full text-right px-4 py-3 rounded-xl font-bold text-gray-300 hover:text-gold-400 hover:bg-gold-500/5 flex items-center gap-3">
+                <i class="fa-solid fa-pen-ruler"></i> اختبارات
+            </button>
+            <button onclick="switchTab('ideas'); toggleMobileMenu()" class="w-full text-right px-4 py-3 rounded-xl font-bold text-gray-300 hover:text-gold-400 hover:bg-gold-500/5 flex items-center gap-3">
+                <i class="fa-solid fa-lightbulb"></i> أفكار
+            </button>
+            <button onclick="switchTab('games'); toggleMobileMenu()" class="w-full text-right px-4 py-3 rounded-xl font-bold text-gray-300 hover:text-gold-400 hover:bg-gold-500/5 flex items-center gap-3">
+                <i class="fa-solid fa-gamepad"></i> ألعاب
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- ==================== TAB 1: HOME (الرئيسية) ==================== -->
+        <section id="tab-home" class="tab-content fade-in space-y-12">
+            <div class="relative luxury-card rounded-3xl p-8 sm:p-12 overflow-hidden border border-gold-500/30 text-center sm:text-right flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-6 max-w-2xl z-10">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-sm font-semibold">
+                        <i class="fa-solid fa-crown text-xs"></i> المنصة التعليمية الذهبية الفاخرة
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                        أهلاً بكم في منصة <br>
+                        <span class="gold-gradient-text text-4xl sm:text-6xl">عمل: نواف سلمان المطيري</span>
+                    </h1>
+                    <p class="text-gray-300 text-lg leading-relaxed font-light">
+                        منصة تعليمية متكاملة مصممة بأسلوب عصري وفخم لدعم طلاب الصف <strong class="text-gold-400 font-bold">الثاني متوسط (الفصل الدراسي الأول)</strong>. تغطي كافة المواد الـ 7 لشروحات مفصلة واختبارات تفاعلية.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 pt-2">
+                        <button onclick="switchTab('lessons')" class="luxury-button px-8 py-3.5 rounded-xl flex items-center gap-3">
+                            <span>تصفح الدروس (21 درساً)</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button onclick="switchTab('quizzes')" class="px-8 py-3.5 rounded-xl border border-gold-500/40 text-gold-400 hover:bg-gold-500/10 font-bold transition-all">
+                            ابدأ الاختبارات المخصصة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative w-64 h-64 flex items-center justify-center flex-shrink-0">
+                    <div class="absolute inset-0 rounded-full border-2 border-dashed border-gold-500/30 animate-spin" style="animation-duration: 25s;"></div>
+                    <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-gold-600/20 to-gold-400/10 border border-gold-500/40 flex flex-col items-center justify-center text-center p-4">
+                        <i class="fa-solid fa-award text-5xl text-gold-400 mb-2"></i>
+                        <span class="text-xs text-gray-300 font-bold uppercase">المعدل العام</span>
+                        <span class="text-2xl font-black text-white" id="overall-progress-text">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Dashboard Widget -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="luxury-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 text-2xl">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 font-medium">الدروس المكتملة</p>
+                        <h3 class="text-2xl font-black text-white" id="completed-lessons-count">0 / 21</h3>
+                        <div class="w-32 bg-gray-800 rounded-full h-1.5 mt-2 overflow-hidden">
+                            <div id="lessons-progress-bar" class="bg-gold-500 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="luxury-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 font-medium">الاختبارات المجتازة</p>
+                        <h3 class="text-2xl font-black text-white" id="passed-quizzes-count">0</h3>
+                        <p class="text-xs text-gray-400 mt-1">محفوظة تلقائياً في جهازك</p>
+                    </div>
+                </div>
+
+                <div class="luxury-card p-6 rounded-2xl flex items-center gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 font-medium">الألعاب المتاحة</p>
+                        <h3 class="text-2xl font-black text-white">5 ألعاب</h3>
+                        <p class="text-xs text-gray-400 mt-1">تنشيط ومراجعة تفاعلية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: LESSONS (الدروس - 21 درساً) ==================== -->
+        <section id="tab-lessons" class="tab-content hidden fade-in space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gold-500/20">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">دروس الثاني متوسط (الفصل الأول)</h2>
+                    <p class="text-gray-400 text-sm mt-1">7 مواد دراسية بواقع 3 دروس مفصلة لكل مادة (21 درساً بشرح وافٍ واختبار سريع)</p>
+                </div>
+
+                <!-- Subject Filter Buttons -->
+                <div id="subject-filters" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div id="lessons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- ==================== TAB 3: QUIZZES (اختبارات معدلة مع الرجوع للسؤال السابق) ==================== -->
+        <section id="tab-quizzes" class="tab-content hidden fade-in space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold">مركز التقييم والتفوق</span>
+                <h2 class="text-3xl font-black text-white">اختبارات تفاعلية شاملة</h2>
+                <p class="text-gray-400 text-sm">حدد نوع الاختبار ونطاق المواد المطلوبة مع إمكانية التعديل والعودة للسؤال السابق بسهولة</p>
+            </div>
+
+            <!-- Quiz Generator Config Card -->
+            <div id="quiz-setup-card" class="luxury-card p-6 sm:p-8 rounded-3xl max-w-3xl mx-auto border border-gold-500/30 space-y-6">
+                <h3 class="text-xl font-bold text-gold-400 flex items-center gap-2 border-b border-gold-500/20 pb-3">
+                    <i class="fa-solid fa-sliders"></i> إعدادات الاختبار
+                </h3>
+
+                <div class="space-y-3">
+                    <label class="text-sm font-bold text-gray-300">اختر نطاق الاختبار:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button onclick="setQuizMode('single')" id="mode-single" class="quiz-mode-btn p-4 rounded-xl border border-gold-500/30 text-center font-bold text-sm bg-gold-500/10 text-gold-400 transition-all">
+                            <i class="fa-solid fa-book-bookmark block text-2xl mb-2"></i>
+                            درس محدد
+                        </button>
+                        <button onclick="setQuizMode('multiple')" id="mode-multiple" class="quiz-mode-btn p-4 rounded-xl border border-gold-500/20 text-center font-bold text-sm text-gray-400 hover:text-gold-400 transition-all">
+                            <i class="fa-solid fa-layer-group block text-2xl mb-2"></i>
+                            عدة دروس
+                        </button>
+                        <button onclick="setQuizMode('all')" id="mode-all" class="quiz-mode-btn p-4 rounded-xl border border-gold-500/20 text-center font-bold text-sm text-gray-400 hover:text-gold-400 transition-all">
+                            <i class="fa-solid fa-globe block text-2xl mb-2"></i>
+                            شامل لجميع الدروس
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-single-select-wrapper" class="space-y-2">
+                    <label class="text-sm font-bold text-gray-300">اختر الدرس المطلوب:</label>
+                    <select id="quiz-single-select" class="w-full bg-darkBg border border-gold-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-gold-400"></select>
+                </div>
+
+                <div id="quiz-multiple-select-wrapper" class="space-y-2 hidden">
+                    <label class="text-sm font-bold text-gray-300">اختر الدروس التي تريد تضمينها:</label>
+                    <div id="quiz-multi-checkboxes" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto p-3 bg-darkBg/60 rounded-xl border border-gold-500/20"></div>
+                </div>
+
+                <button onclick="startCustomQuiz()" class="luxury-button w-full py-4 rounded-xl text-center text-lg font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play"></i> بدء الاختبار الان
+                </button>
+            </div>
+
+            <!-- Active Quiz Area -->
+            <div id="active-quiz-area" class="hidden luxury-card p-6 sm:p-8 rounded-3xl max-w-3xl mx-auto border border-gold-500/40 space-y-6">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-4">
+                    <div>
+                        <span id="quiz-active-title" class="text-xs text-gold-400 font-bold block">اختبار</span>
+                        <h3 class="text-lg font-bold text-white" id="quiz-progress-text">السؤال 1 من 5</h3>
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-400 font-mono font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-clock"></i>
+                        <span id="quiz-timer">05:00</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white leading-relaxed" id="quiz-question-text">نص السؤال...</h4>
+                    <div id="quiz-options-container" class="space-y-3"></div>
+                </div>
+
+                <!-- Navigation Controls with Previous Question Button -->
+                <div class="flex items-center justify-between pt-4 border-t border-gold-500/20 flex-wrap gap-3">
+                    <button onclick="cancelQuiz()" class="text-gray-400 hover:text-red-400 text-sm font-bold">إلغاء الاختبار</button>
+                    
+                    <div class="flex items-center gap-3">
+                        <button onclick="prevQuizQuestion()" id="quiz-prev-btn" class="px-5 py-2.5 rounded-xl border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 font-bold text-sm transition-all hidden">
+                            <i class="fa-solid fa-chevron-right me-1"></i> السؤال السابق
+                        </button>
+                        <button onclick="nextQuizQuestion()" id="quiz-next-btn" class="luxury-button px-6 py-2.5 rounded-xl font-bold text-sm">
+                            السؤال التالي <i class="fa-solid fa-chevron-left ms-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Results Modal / Card -->
+            <div id="quiz-result-card" class="hidden luxury-card p-8 rounded-3xl max-w-xl mx-auto text-center space-y-6 border border-gold-500/40">
+                <div class="w-20 h-20 mx-auto rounded-full bg-gold-500/20 border-2 border-gold-400 flex items-center justify-center text-gold-400 text-4xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">نتيجة الاختبار</h3>
+                <div class="p-4 rounded-2xl bg-darkBg/60 border border-gold-500/20 space-y-2">
+                    <p class="text-gray-400 text-sm">درجتك النهائية:</p>
+                    <p id="quiz-score-display" class="text-4xl font-black gold-gradient-text">0 / 0</p>
+                    <p id="quiz-feedback-msg" class="text-sm text-gold-400 font-bold">ممتاز جداً!</p>
+                </div>
+                <button onclick="resetQuizView()" class="luxury-button w-full py-3 rounded-xl font-bold">العودة للاختبارات</button>
+            </div>
+
+            <!-- History List -->
+            <div class="luxury-card p-6 rounded-3xl max-w-3xl mx-auto space-y-4">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-history text-gold-400"></i> سجل اختباراتك السابقة
+                </h3>
+                <div id="quiz-history-list" class="space-y-2 text-sm text-gray-300 max-h-60 overflow-y-auto"></div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: IDEAS (أفكار والذاكرة الميكانيكية) ==================== -->
+        <section id="tab-ideas" class="tab-content hidden fade-in space-y-10">
+            <div class="luxury-card rounded-3xl p-8 border-2 border-gold-500/40 relative overflow-hidden space-y-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gold-500/20 pb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 text-darkBg flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gold-400 font-bold uppercase tracking-wider">فكرة ممتازة مبتكرة</span>
+                            <h2 class="text-2xl font-black text-white">فكرة الذاكرة الميكانيكية (Mechanical Memory)</h2>
+                            <p class="text-xs text-gray-400">ابتكار بواسطة: <span class="text-gold-400 font-bold">نواف سلمان المطيري</span></p>
+                        </div>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold">المفهوم الهندسي والفيزيائي</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm leading-relaxed text-gray-300">
+                    <div class="space-y-3">
+                        <h4 class="text-gold-400 font-bold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-circle-dot"></i> ما هي الذاكرة الميكانيكية؟
+                        </h4>
+                        <p>
+                            مفهوم ابتكاري لتطوير مادة متكيفة ذاتياً تعتمد على تغيير المقاومة الصلبة للمعدن استجابةً للضغط والجهد المتكرر. المادة "تتذكر" مقدار القوة وتزيد صلابتها تلقائياً لحماية المنشأة أو المركبة.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-gold-400 font-bold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-microchip"></i> التطبيقات والفوائد
+                        </h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-300">
+                            <li>هياكل سيارات ذاتية الامتصاص للصدمات.</li>
+                            <li>طائرات ذاتية التكيّف مع الضغط والرياح العالية.</li>
+                            <li>بنية تحتية وجسور مقاومة للهزات الأرضية.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-darkBg/60 border border-gold-500/20 flex items-center justify-between flex-wrap gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-thumbs-up text-gold-400 text-xl"></i>
+                        <span class="text-sm font-bold text-white">اعجبتك الفكرة؟ يدعمها الطلاب والمهندسون</span>
+                    </div>
+                    <button onclick="likeIdea('mechanical-memory')" class="px-5 py-2 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:bg-gold-500/20 text-sm font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-red-500"></i> إعجاب (<span id="mechanical-memory-likes">42</span>)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Share Idea Form -->
+            <div class="luxury-card p-6 sm:p-8 rounded-3xl space-y-6 border border-gold-500/30">
+                <div class="border-b border-gold-500/20 pb-4">
+                    <h3 class="text-2xl font-black text-white flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-gold-400"></i> شارك أفكارك وابتكاراتك
+                    </h3>
+                    <p class="text-gray-400 text-sm mt-1">شاركتنا أفكارك العلمية والدراسية لتنشر في المنصة وتحفظ تلقائياً</p>
+                </div>
+
+                <form id="idea-form" onsubmit="handleIdeaSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">اسم الطالب / المبتكر:</label>
+                            <input type="text" id="idea-author" required placeholder="أدخل اسمك الكريم" class="w-full bg-darkBg border border-gold-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-gold-400 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-300 mb-2">عنوان الفكرة:</label>
+                            <input type="text" id="idea-title" required placeholder="عنوان الفكرة المبتكرة" class="w-full bg-darkBg border border-gold-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-gold-400 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-2">وصف الفكرة بالتفصيل:</label>
+                        <textarea id="idea-desc" rows="3" required placeholder="اكتب فكرتك باختصار ووضوح..." class="w-full bg-darkBg border border-gold-500/30 rounded-xl p-3 text-white focus:outline-none focus:border-gold-400 text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" class="luxury-button px-8 py-3 rounded-xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> نشر الفكرة
+                    </button>
+                </form>
+            </div>
+
+            <!-- Student Ideas Container -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-white border-r-4 border-gold-400 pr-3">أفكار وابتكارات الطلاب</h3>
+                <div id="student-ideas-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: GAMES (5 ألعاب تعليمية متكاملة) ==================== -->
+        <section id="tab-games" class="tab-content hidden fade-in space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-bold">مركز الألعاب والنشاط الذهني</span>
+                <h2 class="text-3xl font-black text-white">الألعاب التعليمية الـ 5 المصغرة</h2>
+                <p class="text-gray-400 text-sm">استمتع بـ 5 ألعاب تفاعلية سريعة ومصممة خصيصاً لمراجعة المواد والمعلومات</p>
+            </div>
+
+            <!-- Games Switcher -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+                <button onclick="switchGame('math')" id="game-tab-math" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gold-500/20 text-gold-400 border border-gold-500/40">
+                    1. تحدي السرعة الرياضي
+                </button>
+                <button onclick="switchGame('memory')" id="game-tab-memory" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cardBg text-gray-400 border border-gold-500/20 hover:text-gold-400">
+                    2. ذاكرة المفاهيم
+                </button>
+                <button onclick="switchGame('cyber')" id="game-tab-cyber" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cardBg text-gray-400 border border-gold-500/20 hover:text-gold-400">
+                    3. صائد الكلمات الرقمية
+                </button>
+                <button onclick="switchGame('order')" id="game-tab-order" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cardBg text-gray-400 border border-gold-500/20 hover:text-gold-400">
+                    4. الترتيب التاريخي
+                </button>
+                <button onclick="switchGame('blitz')" id="game-tab-blitz" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cardBg text-gray-400 border border-gold-500/20 hover:text-gold-400">
+                    5. الإجابة الخاطفة
+                </button>
+            </div>
+
+            <!-- GAME 1: Math Speed -->
+            <div id="game-math-container" class="luxury-card p-6 sm:p-8 rounded-3xl max-w-2xl mx-auto space-y-6 text-center border border-gold-500/30">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-4">
+                    <div class="text-right">
+                        <span class="text-xs text-gray-400 block">النقاط الحالية</span>
+                        <span id="math-score" class="text-2xl font-black text-gold-400">0</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-xs text-gray-400 block">الوقت المتبقي</span>
+                        <span id="math-timer" class="text-2xl font-black text-red-400 font-mono">20</span>
+                    </div>
+                </div>
+
+                <div id="math-game-box" class="space-y-6 py-4">
+                    <h3 class="text-gray-400 font-bold text-sm">احسب المسألة بسرعة:</h3>
+                    <div id="math-equation" class="text-4xl sm:text-5xl font-black text-white dir-ltr font-mono">? = ? + ?</div>
+                    <div id="math-options" class="grid grid-cols-2 gap-4 max-w-md mx-auto"></div>
+                </div>
+
+                <div id="math-start-overlay" class="space-y-4">
+                    <button onclick="startMathGame()" class="luxury-button px-8 py-3.5 rounded-xl text-lg font-bold">
+                        ابدأ تحدي الحساب السريع
+                    </button>
+                </div>
+            </div>
+
+            <!-- GAME 2: Memory Flip Cards -->
+            <div id="game-memory-container" class="hidden luxury-card p-6 sm:p-8 rounded-3xl max-w-3xl mx-auto space-y-6 border border-gold-500/30 text-center">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-4">
+                    <span class="text-sm font-bold text-gray-300">طابق كل مفهوم علمي ورقمي مع معناه المناسب</span>
+                    <span id="memory-moves" class="text-sm font-bold text-gold-400">المحاولات: 0</span>
+                </div>
+
+                <div id="memory-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 py-4"></div>
+
+                <button onclick="initMemoryGame()" class="px-6 py-2.5 rounded-xl border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 text-sm font-bold">
+                    إعادة تشغيل اللعبة
+                </button>
+            </div>
+
+            <!-- GAME 3: Cyber Word Hunter -->
+            <div id="game-cyber-container" class="hidden luxury-card p-6 sm:p-8 rounded-3xl max-w-2xl mx-auto space-y-6 border border-gold-500/30 text-center">
+                <div class="border-b border-gold-500/20 pb-4">
+                    <h3 class="text-xl font-bold text-gold-400">لعبة صائد الكلمات الرقمية</h3>
+                    <p class="text-xs text-gray-400 mt-1">اضغط على المصطلحات المتعلقة بالأمن السيبراني والتقنية وتجنب المصطلحات الخاطئة!</p>
+                </div>
+
+                <div class="flex justify-between text-sm font-bold text-gold-400 px-4">
+                    <span>النتيجة: <strong id="cyber-score">0</strong></span>
+                    <span>المتبقي: <strong id="cyber-count">5</strong> مصطلحات صحيحة</span>
+                </div>
+
+                <div id="cyber-words-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-4"></div>
+
+                <button onclick="initCyberGame()" class="px-6 py-2.5 rounded-xl border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 text-sm font-bold">
+                    جولة جديدة
+                </button>
+            </div>
+
+            <!-- GAME 4: Historical Timeline Order -->
+            <div id="game-order-container" class="hidden luxury-card p-6 sm:p-8 rounded-3xl max-w-2xl mx-auto space-y-6 border border-gold-500/30 text-center">
+                <div class="border-b border-gold-500/20 pb-4">
+                    <h3 class="text-xl font-bold text-gold-400">لعبة الترتيب التاريخي والحضاري</h3>
+                    <p class="text-xs text-gray-400 mt-1">رتب الأحداث التالية من الأقدم إلى الأحدث بالضغط على الأسهم</p>
+                </div>
+
+                <div id="order-items-list" class="space-y-3"></div>
+
+                <button onclick="checkOrderResult()" class="luxury-button w-full py-3 rounded-xl font-bold">
+                    التحقق من صحة الترتيب
+                </button>
+            </div>
+
+            <!-- GAME 5: Trivia Blitz -->
+            <div id="game-blitz-container" class="hidden luxury-card p-6 sm:p-8 rounded-3xl max-w-2xl mx-auto space-y-6 border border-gold-500/30 text-center">
+                <div class="flex items-center justify-between border-b border-gold-500/20 pb-4">
+                    <h3 class="text-xl font-bold text-gold-400">تحدي الإجابة الخاطفة (Trivia Blitz)</h3>
+                    <span id="blitz-score" class="text-lg font-black text-white">النقاط: 0</span>
+                </div>
+
+                <div class="space-y-4 py-4">
+                    <p id="blitz-question-text" class="text-lg font-bold text-white leading-relaxed">جاري التحميل...</p>
+                    <div id="blitz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detailed Lesson Modal View -->
+    <div id="lesson-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="luxury-card w-full max-w-3xl rounded-3xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-gold-500/40 my-8">
+            <div class="flex items-center justify-between border-b border-gold-500/20 pb-4">
+                <div>
+                    <span id="modal-subject-tag" class="px-3 py-1 rounded-full bg-gold-500/10 text-gold-400 text-xs font-bold border border-gold-500/30">المادة</span>
+                    <h2 id="modal-lesson-title" class="text-2xl font-black text-white mt-2">عنوان الدرس</h2>
+                </div>
+                <button onclick="closeLessonModal()" class="w-10 h-10 rounded-full bg-darkBg border border-gold-500/30 text-gray-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="modal-lesson-body" class="space-y-6 text-gray-300 text-sm leading-relaxed"></div>
+
+            <div class="pt-6 border-t border-gold-500/20 space-y-6">
+                <div class="flex items-center justify-between bg-darkBg/60 p-4 rounded-2xl border border-gold-500/20 flex-wrap gap-3">
+                    <div>
+                        <h4 class="font-bold text-white text-base">حالة الدرس</h4>
+                        <p class="text-xs text-gray-400">احفظ تقدمك لتسجيل مراجعة هذا الدرس في المنصة</p>
+                    </div>
+                    <button id="modal-complete-btn" onclick="toggleLessonCompletion()" class="luxury-button px-6 py-2.5 rounded-xl text-sm font-bold">
+                        <i class="fa-solid fa-check"></i> تحديد كـ مكتمل
+                    </button>
+                </div>
+
+                <!-- Quick Lesson Quiz embedded -->
+                <div class="luxury-card p-5 rounded-2xl space-y-4 border border-gold-500/20">
+                    <h4 class="font-bold text-gold-400 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question"></i> اختبار سريع للدرس
+                    </h4>
+                    <p id="modal-quiz-q" class="font-bold text-white text-base">السؤال؟</p>
+                    <div id="modal-quiz-opts" class="space-y-2"></div>
+                    <div id="modal-quiz-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 luxury-card px-6 py-4 rounded-2xl border border-gold-500/50 text-white flex items-center gap-3 shadow-2xl">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-gold-400 text-xl"></i>
+        <span id="toast-message" class="text-sm font-bold">تم إنجاز العملية بنجاح!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-darkBg border-t border-gold-500/20 mt-12 py-8 text-center text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <div class="flex items-center justify-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                    <i class="fa-solid fa-crown text-sm"></i>
+                </div>
+                <span class="font-black text-lg gold-gradient-text">عمل: نواف سلمان المطيري</span>
+            </div>
+            <p class="text-xs text-gray-500">جميع الحقوق محفوظة للمنصة التعليمية - الثاني متوسط (الفصل الدراسي الأول)</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Application Logic -->
+    <script>
+        /* ==========================================================================
+           1. COMPREHENSIVE DATA (21 LESSONS FOR 7 SUBJECTS)
+           ========================================================================== */
+        const lessonsData = [
+            // 1. الرياضيات (3 دروس)
+            {
+                id: 'math-1',
+                subject: 'الرياضيات',
+                subjectKey: 'math',
+                title: 'الأعداد النسبية',
+                icon: 'fa-calculator',
+                summary: 'مفهوم العدد النسبي، تحويل الكسور، والفرق بين الكسر الدوري والمنتهي.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>العدد النسبي هو أي عدد يمكن كتابته على صورة كسر اعتيادي (أ/ب) حيث أ و ب عددان صحيحان و شرط أساسي أن ب لا تساوي الصفر.</p>
+                    <ul class="list-disc list-inside space-y-2 mt-2">
+                        <li><strong>الكسر العشري المنتهي:</strong> هو الكسر الذي تنتهي عملية قسمته بدون باقٍ، مثل 3/4 = 0.75.</li>
+                        <li><strong>الكسر العشري الدوري:</strong> هو الكسر الذي تتكرر فيه الأرقام بعد الفاصلة بلا نهاية، مثل 1/3 = 0.333... وتكتب بوضع خط فوق الرقم المتكرر.</li>
+                    </ul>
+                `,
+                quiz: { question: "أي من الكسور التالية يمثل كسراً عشرياً منتهياً؟", options: ["3/4 (0.75)", "1/3 (0.333...)", "2/3 (0.666...)", "1/7"], correct: 0 }
+            },
+            {
+                id: 'math-2',
+                subject: 'الرياضيات',
+                subjectKey: 'math',
+                title: 'القوى والمفهوم الأسسي',
+                icon: 'fa-superscript',
+                summary: 'كيفية كتابة الأعداد بالصيغة الأسية وقوانين ضرب وقسمة القوى.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>التعبير الأسسي يتكون من <strong>الأساس</strong> (العدد الذي يتكرر ضربه) و<strong>الأس</strong> (عدد مرات التكرار).</p>
+                    <div class="p-3 bg-darkBg/80 rounded-xl border border-gold-500/20 my-2 font-mono text-xs">
+                        مثال: 2⁴ تعني (2 × 2 × 2 × 2) وتساوي 16.
+                    </div>
+                    <p class="mt-2"><strong>قواعد أساسية:</strong> عند ضرب القوى ذات الأساس المتشابه نجمع الأسس (س² × س³ = س⁵)، وعند القسمة نطرح الأسس.</p>
+                `,
+                quiz: { question: "ما قيمة التعبير الأسسي 3³ ؟", options: ["27", "9", "6", "81"], correct: 0 }
+            },
+            {
+                id: 'math-3',
+                subject: 'الرياضيات',
+                subjectKey: 'math',
+                title: 'نظرية فيثاغورس',
+                icon: 'fa-shapes',
+                summary: 'حساب طول الوتر والأضلاع المجهولة في المثلث القائم الزاوية.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تنص نظرية فيثاغورس على أنه في أي مثلث قائم الزاوية، يكون مربع طول الوتر (الضلع الأطول المقابل للزاوية القائمة) مساوياً لمجموع مربعي طولي الضلعين الآخرين.</p>
+                    <div class="p-4 bg-darkBg/80 rounded-xl border border-gold-500/20 text-center my-3 font-mono text-gold-400 font-bold">جـ² = أ² + ب²</div>
+                `,
+                quiz: { question: "مثلث قائم طول ضلعية 6 سم و 8 سم، ما طول الوتر (جـ)؟", options: ["10 سم", "14 سم", "48 سم", "12 سم"], correct: 0 }
+            },
+
+            // 2. العلوم (3 دروس)
+            {
+                id: 'sci-1',
+                subject: 'العلوم',
+                subjectKey: 'science',
+                title: 'أسلوب العلم والخطوات العلمية',
+                icon: 'fa-flask',
+                summary: 'طرق البحث والتفكير العلمي وتحديد المتغيرات المستقلة والتابعة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>يتبع العلماء أسلوباً منظماً لحل المشكلات وفهم الظواهر يبدأ بـ <strong>الملاحظة</strong>، ثم طرح الأسئلة، ووضع <strong>الفرضية</strong> (تخمين ذكي قابل للاختبار).</p>
+                    <ul class="list-disc list-inside space-y-1 mt-2">
+                        <li><strong>المتغير المستقل:</strong> العامل الذي نغيره بوعي في التجربة.</li>
+                        <li><strong>المتغير التابع:</strong> العامل الذي يقاس ويتغير بنتيجة تغير المتغير المستقل.</li>
+                    </ul>
+                `,
+                quiz: { question: "العامل الذي نقوم بتغييره قصداً في التجربة العلمية يسمى:", options: ["المتغير المستقل", "المتغير التابع", "الثابت", "الضابط"], correct: 0 }
+            },
+            {
+                id: 'sci-2',
+                subject: 'العلوم',
+                subjectKey: 'science',
+                title: 'المحاليل والدمج الكيميائي',
+                icon: 'fa-vial',
+                summary: 'أنواع المخاليط المتجانسة والغير متجانسة وحساب تركيز المحلول.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>المخاليط تنقسم إلى نوعين أساسيين:</p>
+                    <ul class="list-disc list-inside space-y-2 mt-2">
+                        <li><strong>المخاليط غير المتجانسة:</strong> يمكن تمييز مكوناتها بالعين مثل السلطة أو الماء والزيت.</li>
+                        <li><strong>المحاليل (المخاليط المتجانسة):</strong> تتوزع فيها المواد بانتظام ويتكون المحلول من <strong>المذاب</strong> (المادة الأقل) و<strong>المذيب</strong> (المادة الأكثر مثل الماء).</li>
+                    </ul>
+                `,
+                quiz: { question: "المادة التي تذوب وتكون نسبتها أقل في المحلول تسمى:", options: ["المذاب", "المذيب", "الراسب", "المخلوط الغروي"], correct: 0 }
+            },
+            {
+                id: 'sci-3',
+                subject: 'العلوم',
+                subjectKey: 'science',
+                title: 'الحركة والقوانين الفيزيائية',
+                icon: 'fa-gauge-high',
+                summary: 'مفهوم السرعة، التسارع، وقوانين نيوتن للحركة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تُوصف الحركة بقوانين فيزيائية واضحة:</p>
+                    <p><strong>السرعة المتوسطة:</strong> هي المسافة الكلية مقسومة على الزمن الكلي (ع = ف / ز).</p>
+                    <p class="mt-2"><strong>التسارع:</strong> هو التغير في السرعة المتجهة مقسوماً على الزمن المستغرق لهذا التغير.</p>
+                `,
+                quiz: { question: "إذا قطعت سيارة مسافة 200 كم في زمن قدره 2 ساعة، فكم سرعتها المتوسطة؟", options: ["100 كم/ساعة", "400 كم/ساعة", "50 كم/ساعة", "150 كم/ساعة"], correct: 0 }
+            },
+
+            // 3. المهارات الرقمية (3 دروس جديدة)
+            {
+                id: 'dig-1',
+                subject: 'المهارات الرقمية',
+                subjectKey: 'digital',
+                title: 'أساسيات البرمجة والخوارزميات',
+                icon: 'fa-code',
+                summary: 'مفهوم الخوارزمية، المخططات الانسيابية، ولغات البرمجة الحديثة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p><strong>الخوارزمية (Algorithm):</strong> هي سلسلة من الخطوات المنطقية والمتسلسلة المحددة لحل مشكلة أو إنجاز مهمة معينة.</p>
+                    <p class="mt-2"><strong>مخطط الانسياب (Flowchart):</strong> تمثيل بياني ورسومي للخطوات باستخدام أشكال هندسية قياسية (كالأسهم والمستطيلات والمعينات).</p>
+                `,
+                quiz: { question: "الخطوات المتسلسلة والمنطقية المتبعة لحل مشكلة برمجية تسمى:", options: ["خوارزمية", "قاعدة بيانات", "شبكة محلية", "نظام تشغيل"], correct: 0 }
+            },
+            {
+                id: 'dig-2',
+                subject: 'المهارات الرقمية',
+                subjectKey: 'digital',
+                title: 'معالجة النصوص والمستندات',
+                icon: 'fa-file-lines',
+                summary: 'تنسيق الجداول والمستندات المتقدمة وإدراج الوسائط بمهارة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تتيح برامج معالجة النصوص تحرير المستندات وتنسيق الفقرات واحتراف الجداول.</p>
+                    <ul class="list-disc list-inside space-y-1 mt-2">
+                        <li>استخدام الأنماط (Styles) لتنسيق العناوين الموحدة.</li>
+                        <li>إدراج الصور والرسومات البيانية ودعم التدقيق الإملائي والنحوي.</li>
+                    </ul>
+                `,
+                quiz: { question: "تُستخدم الأنماط (Styles) في معالجة النصوص من أجل:", options: ["تطبيق تنسيقات موحدة بسرعة", "طباعة المستند", "حذف النصوص تلقائياً", "إغلاق البرنامج"], correct: 0 }
+            },
+            {
+                id: 'dig-3',
+                subject: 'المهارات الرقمية',
+                subjectKey: 'digital',
+                title: 'الأمن السيبراني والسلامة الرقمية',
+                icon: 'fa-user-shield',
+                summary: 'حماية البيانات الشخصية، كلمات المرور القوية، والحذر من التصيد الإلكرتوني.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>الأمن السيبراني هو مجموعة الوسائل والتقنيات لحماية الأنظمة والشبكات والبيانات من الهجمات الرقمية.</p>
+                    <p class="mt-2"><strong>كلمة المرور القوية:</strong> تحتوي على أحرف كبيرة وصغيرة وأرقام ورموز ولا تقل عن 8 خانات.</p>
+                `,
+                quiz: { question: "أي مما يلي يُعد من خصائص كلمة المرور القوية والأمنة؟", options: ["تتكون من رموز وأرقام وأحرف متنوعة", "اسم الطالب وتاريخ ميلاده", "12345678", "كلمة كلمة فقط"], correct: 0 }
+            },
+
+            // 4. لغتي الخالدة (3 دروس)
+            {
+                id: 'arab-1',
+                subject: 'لغتي الخالدة',
+                subjectKey: 'arabic',
+                title: 'الرسم الإملائي (الهمزة المتوسطة)',
+                icon: 'fa-pen-nib',
+                summary: 'قاعدة أقوى الحركات في الإملاء لكتابة الهمزة المتوسطة بالشكل الصحيح.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تعتمد كتابة الهمزة المتوسطة على المقارنة بين حركتها وحركة الحرف الذي قبلها، وتكتب على الحرف الذي يناسب الحركة الأقوى:</p>
+                    <div class="p-3 bg-darkBg/80 rounded-xl border border-gold-500/20 my-2 text-xs">
+                        ترتيب الحركات: <strong>1. الكسرة (ياء) ⬅ 2. الضمة (واو) ⬅ 3. الفتحة (ألف) ⬅ 4. السكون</strong>
+                    </div>
+                `,
+                quiz: { question: "تكتب الهمزة المتوسطة على ياء (نبرة) إذا كانت أقوى الحركات هي:", options: ["الكسرة", "الضمة", "الفتحة", "السكون"], correct: 0 }
+            },
+            {
+                id: 'arab-2',
+                subject: 'لغتي الخالدة',
+                subjectKey: 'arabic',
+                title: 'الأسلوب اللغوي (أسلوب الشرط)',
+                icon: 'fa-quote-right',
+                summary: 'أركان جملة الشرط والأدوات الجازمة وغير الجازمة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>أسلوب الشرط هو تركيب جملي يتوقف فيه وقوع أمر على وقوع أمر آخر، ويتكون من 3 أركان:</p>
+                    <p><strong>1. أداة الشرط</strong> (مثل: مَنْ، إِنْ) + <strong>2. فعل الشرط</strong> + <strong>3. جواب الشرط</strong>.</p>
+                `,
+                quiz: { question: "في جملة (من يجتهد ينجح)، الركن 'ينجح' يمثل:", options: ["جواب الشرط", "فعل الشرط", "أداة الشرط", "فاعل"], correct: 0 }
+            },
+            {
+                id: 'arab-3',
+                subject: 'لغتي الخالدة',
+                subjectKey: 'arabic',
+                title: 'الفاعل ونائبه',
+                icon: 'fa-font',
+                summary: 'تحويل الفعل للمجهول وإعراب نائب الفاعل المرفوع.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p><strong>الفاعل:</strong> اسم مرفوع يدل على من قام بالفعل.</p>
+                    <p class="mt-2">عند بناء الفعل للمجهول يحذف الفاعل ويحل المفعول به محله ويسمى <strong>نائب فاعل</strong> ويكون مرفوعاً دائماً.</p>
+                `,
+                quiz: { question: "عند تحويل الجملة (كتب الطالبُ الدرسَ) للمجهول تصبح:", options: ["كُتِبَ الدرسُ", "كُتِبَ الطالبُ", "كتب الدرسَ", "يكتب الدرسُ"], correct: 0 }
+            },
+
+            // 5. الدراسات الاجتماعية (3 دروس)
+            {
+                id: 'soc-1',
+                subject: 'الدراسات الاجتماعية',
+                subjectKey: 'social',
+                title: 'الدولة السعودية الأولى',
+                icon: 'fa-landmark',
+                summary: 'التأسيس والدرعية وعهد الإمام محمد بن سعود عام 1139هـ.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تأسست الدولة السعودية الأولى عام 1139هـ (1727م) على يد <strong>الإمام محمد بن سعود</strong> وتخذت من <strong>الدرعية</strong> عاصمة لها، حيث شهدت المنطقة استقراراً وأمناً ووحدة إسلامية شاملة.</p>
+                `,
+                quiz: { question: "من هو مؤسس الدولة السعودية الأولى عام 1139هـ؟", options: ["الإمام محمد بن سعود", "الإمام تركي بن عبد الله", "الملك عبد العزيز", "الإمام سعود بن عبد العزيز"], correct: 0 }
+            },
+            {
+                id: 'soc-2',
+                subject: 'الدراسات الاجتماعية',
+                subjectKey: 'social',
+                title: 'المظاهر الحضارية للشرق',
+                icon: 'fa-monument',
+                summary: 'الإنجازات العمرانية والإدارية في العالم الإسلامي.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تميزت الحضارة الإسلامية بتطور النظام الإداري (كالبيت المال والدواوين) والعمراني بناء المساجد والمدارس والربط بين الطرق التجارية.</p>
+                `,
+                quiz: { question: "تعد العمارة وتأسيس الدواوين من المظاهر:", options: ["الحضارية والإدارية", "الصناعية فقط", "البدوية", "الموسمية"], correct: 0 }
+            },
+            {
+                id: 'soc-3',
+                subject: 'الدراسات الاجتماعية',
+                subjectKey: 'social',
+                title: 'الثروة الحيوانية والنباتية',
+                icon: 'fa-tree',
+                summary: 'التوزيع الجغرافي للموارد في الوطن العربي ومصادر الأمن الغذائي.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>تتنوع الثروة النباتية (الحبوب والمحاصيل كالقمح والتمور) والثروة الحيوانية (الأغنام والأبقار والإبل) وتؤدي دوراً جوهرياً في تحقيق الأمن الغذائي.</p>
+                `,
+                quiz: { question: "تعتبر التمور والحبوب الغذائية من مكونات الثروة:", options: ["النباتية", "الحيوانية", "المعدنية", "السيبرانية"], correct: 0 }
+            },
+
+            // 6. الدراسات الإسلامية (3 دروس)
+            {
+                id: 'isl-1',
+                subject: 'الدراسات الإسلامية',
+                subjectKey: 'islamic',
+                title: 'التوحيد والربوبية',
+                icon: 'fa-mosque',
+                summary: 'الإقرار بأن الله هو الخالق الرازق المدبر لجميع الأمور.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p><strong>توحيد الربوبية:</strong> هو أفرد الله تعالى بأفعاله كالخلق، والرزق، والإحياء، والإماتة، والتدبير. وهو فظرة أقر بها معظم الخلق.</p>
+                `,
+                quiz: { question: "الإفراد بأن الله تعالى هو الخالق الرازق وحده يسمى توحيد:", options: ["الربوبية", "الألوهية", "الأسماء والصفات", "الاتباع"], correct: 0 }
+            },
+            {
+                id: 'isl-2',
+                subject: 'الدراسات الإسلامية',
+                subjectKey: 'islamic',
+                title: 'أحكام الصلاة والسهو',
+                icon: 'fa-hands-praying',
+                summary: 'سجود السهو وسُبُله عند الزيادة أو النقص أو الشك.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>سجود السهو هما سجدتان يسجدهما المصلي لجبر الخلل الحاصل في صلاته بسبب السهو (الزيادة، النقص، أو الشك).</p>
+                `,
+                quiz: { question: "يسجد المصلي سجدتي السهو في حال:", options: ["السهو بالزيادة أو النقص أو الشك", "ترك ركن عمداً", "ترك شرط عمداً", "الأكل عمداً"], correct: 0 }
+            },
+            {
+                id: 'isl-3',
+                subject: 'الدراسات الإسلامية',
+                subjectKey: 'islamic',
+                title: 'الأخلاق في الإسلام',
+                icon: 'fa-heart-pulse',
+                summary: 'مكانة الصدق والأمانة والتسامح وفضلها في السنة.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">الشرح التفصيلي المفصل:</h3>
+                    <p>جاء الإسلام ليممم مكارم الأخلاق. فالصدق يهديه إلى البر والبر يهدي إلى الجنة، والأمانة شرط كمال الإيمان.</p>
+                `,
+                quiz: { question: "قال النبي ﷺ: 'إن الصدق يهدي إلى...':", options: ["البر", "الفجور", "الغرور", "الكذب"], correct: 0 }
+            },
+
+            // 7. اللغة الإنجليزية (3 دروس)
+            {
+                id: 'eng-1',
+                subject: 'اللغة الإنجليزية',
+                subjectKey: 'english',
+                title: 'Present Continuous Tense',
+                icon: 'fa-language',
+                summary: 'Forming actions happening right now using (am/is/are + V-ing).',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">Detailed Rule Explanation:</h3>
+                    <p>We use the <strong>Present Continuous</strong> for actions that are happening right now at the moment of speaking.</p>
+                    <div class="p-3 bg-darkBg/80 rounded-xl border border-gold-500/20 my-2 font-mono text-xs">
+                        Rule: Subject + (am / is / are) + Verb-ing<br>
+                        Example: He <strong>is studying</strong> English right now.
+                    </div>
+                `,
+                quiz: { question: "Choose the correct verb: 'Look! They ____ basketball now.'", options: ["are playing", "play", "played", "plays"], correct: 0 }
+            },
+            {
+                id: 'eng-2',
+                subject: 'اللغة الإنجليزية',
+                subjectKey: 'english',
+                title: 'Vocabulary & Foundations',
+                icon: 'fa-spell-check',
+                summary: 'Essential grade 8 key vocabulary, prefixes, and suffixes.',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">Detailed Explanation:</h3>
+                    <p>Expanding vocabulary using context clues, antonyms, and synonyms for effective communication.</p>
+                `,
+                quiz: { question: "What is the opposite (antonym) of 'Safe'?", options: ["Dangerous", "Secure", "Protected", "Strong"], correct: 0 }
+            },
+            {
+                id: 'eng-3',
+                subject: 'اللغة الإنجليزية',
+                subjectKey: 'english',
+                title: 'Sentence Structure',
+                icon: 'fa-align-right',
+                summary: 'Building Simple vs Compound sentences with connectors (and, but, so).',
+                content: `
+                    <h3 class="text-gold-400 font-bold text-lg mb-2">Detailed Explanation:</h3>
+                    <p>A simple sentence contains a subject and a verb. A compound sentence connects two ideas using conjunctions like <strong>and</strong>, <strong>but</strong>, or <strong>so</strong>.</p>
+                `,
+                quiz: { question: "Choose the conjunction: 'I wanted to go out, ____ it started raining.'", options: ["but", "so", "or", "and"], correct: 0 }
+            }
+        ];
+
+        /* ==========================================================================
+           2. LOCAL STORAGE STATE
+           ========================================================================== */
+        let state = {
+            completedLessons: JSON.parse(localStorage.getItem('nawaf_completed_lessons')) || [],
+            quizHistory: JSON.parse(localStorage.getItem('nawaf_quiz_history')) || [],
+            studentIdeas: JSON.parse(localStorage.getItem('nawaf_student_ideas')) || [
+                { id: 'idea-init-1', author: 'سلمان العتيبي', title: 'تطبيق جدول المذاكرة الذكي', desc: 'خوارزمية تقوم بترتيب المواد وتحديد وقت الاستراحة بناءً على درجة صعوبة الدرس ومدى إكمال الطالب له.', likes: 18 }
+            ],
+            likesMap: JSON.parse(localStorage.getItem('nawaf_likes_map')) || { 'mechanical-memory': 42 },
+            mathHighScore: parseInt(localStorage.getItem('nawaf_math_score')) || 0
+        };
+
+        function saveState() {
+            localStorage.setItem('nawaf_completed_lessons', JSON.stringify(state.completedLessons));
+            localStorage.setItem('nawaf_quiz_history', JSON.stringify(state.quizHistory));
+            localStorage.setItem('nawaf_student_ideas', JSON.stringify(state.studentIdeas));
+            localStorage.setItem('nawaf_likes_map', JSON.stringify(state.likesMap));
+            localStorage.setItem('nawaf_math_score', state.mathHighScore);
+            updateDashboardStats();
+        }
+
+        /* ==========================================================================
+           3. UI CONTROLS & NAVIGATION
+           ========================================================================== */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-${tabId}`);
+            if(target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-gold-400', 'bg-gold-500/10', 'border', 'border-gold-500/30');
+                btn.classList.add('text-gray-400');
+            });
+
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeNav) {
+                activeNav.classList.add('text-gold-400', 'bg-gold-500/10', 'border', 'border-gold-500/30');
+                activeNav.classList.remove('text-gray-400');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function updateDashboardStats() {
+            const total = lessonsData.length;
+            const completed = state.completedLessons.length;
+            const percent = Math.round((completed / total) * 100);
+
+            document.getElementById('completed-lessons-count').innerText = `${completed} / ${total}`;
+            document.getElementById('lessons-progress-bar').style.width = `${percent}%`;
+            document.getElementById('overall-progress-text').innerText = `${percent}%`;
+            document.getElementById('passed-quizzes-count').innerText = state.quizHistory.length;
+        }
+
+        /* ==========================================================================
+           4. LESSONS LOGIC
+           ========================================================================== */
+        let currentSubjectFilter = 'all';
+        let activeModalLesson = null;
+
+        function renderSubjectFilters() {
+            const subjects = [
+                { key: 'all', name: 'الكل' },
+                { key: 'math', name: 'الرياضيات' },
+                { key: 'science', name: 'العلوم' },
+                { key: 'digital', name: 'المهارات الرقمية' },
+                { key: 'arabic', name: 'لغتي الخالدة' },
+                { key: 'social', name: 'الدراسات الاجتماعية' },
+                { key: 'islamic', name: 'الدراسات الإسلامية' },
+                { key: 'english', name: 'اللغة الإنجليزية' }
+            ];
+
+            const container = document.getElementById('subject-filters');
+            container.innerHTML = subjects.map(s => `
+                <button onclick="filterLessons('${s.key}')" 
+                        class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${currentSubjectFilter === s.key ? 'luxury-button' : 'bg-cardBg text-gray-400 hover:text-gold-400 border border-gold-500/20'}">
+                    ${s.name}
+                </button>
+            `).join('');
+        }
+
+        function filterLessons(key) {
+            currentSubjectFilter = key;
+            renderSubjectFilters();
+            renderLessons();
+        }
+
+        function renderLessons() {
+            const grid = document.getElementById('lessons-grid');
+            const filtered = currentSubjectFilter === 'all' 
+                ? lessonsData 
+                : lessonsData.filter(l => l.subjectKey === currentSubjectFilter);
+
+            grid.innerHTML = filtered.map(lesson => {
+                const isDone = state.completedLessons.includes(lesson.id);
+                return `
+                    <div class="luxury-card rounded-2xl p-6 space-y-4 flex flex-col justify-between border ${isDone ? 'border-emerald-500/40' : 'border-gold-500/20'}">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-gold-500/10 text-gold-400 text-xs font-bold border border-gold-500/20">${lesson.subject}</span>
+                                ${isDone ? '<span class="text-xs text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> مكتمل</span>' : ''}
+                            </div>
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid ${lesson.icon} text-gold-400 text-base"></i> ${lesson.title}
+                            </h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">${lesson.summary}</p>
+                        </div>
+                        <button onclick="openLessonModal('${lesson.id}')" class="w-full py-2.5 rounded-xl border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 font-bold text-sm transition-all flex items-center justify-center gap-2">
+                            <span>فتح الشرح والإختبار السريع</span>
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openLessonModal(id) {
+            activeModalLesson = lessonsData.find(l => l.id === id);
+            if(!activeModalLesson) return;
+
+            document.getElementById('modal-subject-tag').innerText = activeModalLesson.subject;
+            document.getElementById('modal-lesson-title').innerText = activeModalLesson.title;
+            document.getElementById('modal-lesson-body').innerHTML = activeModalLesson.content;
+
+            document.getElementById('modal-quiz-q').innerText = activeModalLesson.quiz.question;
+            const optsContainer = document.getElementById('modal-quiz-opts');
+            optsContainer.innerHTML = activeModalLesson.quiz.options.map((opt, idx) => `
+                <button onclick="answerModalQuiz(${idx})" class="w-full text-right p-3 rounded-xl bg-darkBg border border-gold-500/20 hover:border-gold-400 text-xs text-gray-300 font-medium transition-all">
+                    ${opt}
+                </button>
+            `).join('');
+            document.getElementById('modal-quiz-feedback').classList.add('hidden');
+
+            updateModalCompleteBtn();
+            document.getElementById('lesson-modal').classList.remove('hidden');
+        }
+
+        function closeLessonModal() {
+            document.getElementById('lesson-modal').classList.add('hidden');
+        }
+
+        function updateModalCompleteBtn() {
+            const btn = document.getElementById('modal-complete-btn');
+            const isDone = state.completedLessons.includes(activeModalLesson.id);
+            if(isDone) {
+                btn.className = "px-6 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white flex items-center gap-2";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> مكتمل بالكامل`;
+            } else {
+                btn.className = "luxury-button px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2";
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> تحديد كـ مكتمل`;
+            }
+        }
+
+        function toggleLessonCompletion() {
+            if(!activeModalLesson) return;
+            const idx = state.completedLessons.indexOf(activeModalLesson.id);
+            if(idx > -1) {
+                state.completedLessons.splice(idx, 1);
+                showToast("تم إلغاء تحديد إكمال الدرس");
+            } else {
+                state.completedLessons.push(activeModalLesson.id);
+                showToast("ممتاز! تم حفظ إكمال الدرس في حسابك");
+            }
+            saveState();
+            updateModalCompleteBtn();
+            renderLessons();
+        }
+
+        function answerModalQuiz(selectedIdx) {
+            const fb = document.getElementById('modal-quiz-feedback');
+            fb.classList.remove('hidden');
+            if(selectedIdx === activeModalLesson.quiz.correct) {
+                fb.className = "p-3 rounded-xl text-xs font-bold text-center bg-emerald-500/20 border border-emerald-500/40 text-emerald-400";
+                fb.innerText = "إجابة صحيحة وممتازة!";
+            } else {
+                fb.className = "p-3 rounded-xl text-xs font-bold text-center bg-red-500/20 border border-red-500/40 text-red-400";
+                fb.innerText = "إجابة خاطئة، حاول مجدداً.";
+            }
+        }
+
+        /* ==========================================================================
+           5. QUIZZES LOGIC WITH PREVIOUS QUESTION SUPPORT
+           ========================================================================== */
+        let quizState = {
+            mode: 'single',
+            questions: [],
+            currentIndex: 0,
+            userAnswers: [], // Stores user choices
+            timerInterval: null,
+            timeLeft: 300
+        };
+
+        function setQuizMode(mode) {
+            quizState.mode = mode;
+            document.querySelectorAll('.quiz-mode-btn').forEach(btn => {
+                btn.classList.remove('bg-gold-500/10', 'text-gold-400', 'border-gold-500/30');
+                btn.classList.add('text-gray-400');
+            });
+            const activeBtn = document.getElementById(`mode-${mode}`);
+            activeBtn.classList.add('bg-gold-500/10', 'text-gold-400', 'border-gold-500/30');
+
+            document.getElementById('quiz-single-select-wrapper').classList.toggle('hidden', mode !== 'single');
+            document.getElementById('quiz-multiple-select-wrapper').classList.toggle('hidden', mode !== 'multiple');
+        }
+
+        function initQuizSelectors() {
+            const singleSelect = document.getElementById('quiz-single-select');
+            singleSelect.innerHTML = lessonsData.map(l => `<option value="${l.id}">${l.subject}: ${l.title}</option>`).join('');
+
+            const multiBox = document.getElementById('quiz-multi-checkboxes');
+            multiBox.innerHTML = lessonsData.map(l => `
+                <label class="flex items-center gap-2 p-2 hover:bg-gold-500/5 rounded-lg text-xs text-gray-300 cursor-pointer">
+                    <input type="checkbox" value="${l.id}" class="quiz-multi-cb accent-gold-500">
+                    <span>${l.subject}: ${l.title}</span>
+                </label>
+            `).join('');
+        }
+
+        function startCustomQuiz() {
+            let selectedLessons = [];
+
+            if(quizState.mode === 'single') {
+                const val = document.getElementById('quiz-single-select').value;
+                selectedLessons = lessonsData.filter(l => l.id === val);
+            } else if(quizState.mode === 'multiple') {
+                const checkboxes = document.querySelectorAll('.quiz-multi-cb:checked');
+                const ids = Array.from(checkboxes).map(c => c.value);
+                if(ids.length === 0) {
+                    showToast("يرجى اختيار درس واحد على الأقل");
+                    return;
+                }
+                selectedLessons = lessonsData.filter(l => ids.includes(l.id));
+            } else {
+                selectedLessons = [...lessonsData];
+            }
+
+            quizState.questions = selectedLessons.map(l => ({
+                lessonTitle: l.title,
+                ...l.quiz
+            }));
+
+            quizState.currentIndex = 0;
+            quizState.userAnswers = new Array(quizState.questions.length).fill(null);
+            quizState.timeLeft = quizState.questions.length * 60;
+
+            document.getElementById('quiz-setup-card').classList.add('hidden');
+            document.getElementById('quiz-result-card').classList.add('hidden');
+            document.getElementById('active-quiz-area').classList.remove('hidden');
+
+            startQuizTimer();
+            renderQuizQuestion();
+        }
+
+        function startQuizTimer() {
+            clearInterval(quizState.timerInterval);
+            quizState.timerInterval = setInterval(() => {
+                quizState.timeLeft--;
+                const min = Math.floor(quizState.timeLeft / 60).toString().padStart(2, '0');
+                const sec = (quizState.timeLeft % 60).toString().padStart(2, '0');
+                document.getElementById('quiz-timer').innerText = `${min}:${sec}`;
+
+                if(quizState.timeLeft <= 0) {
+                    clearInterval(quizState.timerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function renderQuizQuestion() {
+            const q = quizState.questions[quizState.currentIndex];
+            document.getElementById('quiz-active-title').innerText = `اختبار: ${q.lessonTitle}`;
+            document.getElementById('quiz-progress-text').innerText = `السؤال ${quizState.currentIndex + 1} من ${quizState.questions.length}`;
+            document.getElementById('quiz-question-text').innerText = q.question;
+
+            // Toggle Previous Button Visibility
+            const prevBtn = document.getElementById('quiz-prev-btn');
+            if(quizState.currentIndex > 0) {
+                prevBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+            }
+
+            // Options rendering with previously selected answer state
+            const currentSelected = quizState.userAnswers[quizState.currentIndex];
+            const optsBox = document.getElementById('quiz-options-container');
+            optsBox.innerHTML = q.options.map((opt, idx) => `
+                <button onclick="selectQuizOption(${idx})" class="quiz-opt-btn w-full text-right p-4 rounded-xl border ${currentSelected === idx ? 'bg-gold-500/20 border-2 border-gold-400 text-gold-400 font-bold' : 'bg-darkBg border-gold-500/20 text-gray-200 font-medium'} text-sm transition-all">
+                    ${opt}
+                </button>
+            `).join('');
+
+            // Button label for last question
+            const nextBtn = document.getElementById('quiz-next-btn');
+            if(quizState.currentIndex === quizState.questions.length - 1) {
+                nextBtn.innerHTML = `إنهاء الاختبار <i class="fa-solid fa-check ms-1"></i>`;
+            } else {
+                nextBtn.innerHTML = `السؤال التالي <i class="fa-solid fa-chevron-left ms-1"></i>`;
+            }
+        }
+
+        function selectQuizOption(idx) {
+            quizState.userAnswers[quizState.currentIndex] = idx;
+            document.querySelectorAll('.quiz-opt-btn').forEach((btn, i) => {
+                if(i === idx) {
+                    btn.className = "quiz-opt-btn w-full text-right p-4 rounded-xl bg-gold-500/20 border-2 border-gold-400 text-sm font-bold text-gold-400";
+                } else {
+                    btn.className = "quiz-opt-btn w-full text-right p-4 rounded-xl bg-darkBg border border-gold-500/20 text-sm font-medium text-gray-200";
+                }
+            });
+        }
+
+        function prevQuizQuestion() {
+            if(quizState.currentIndex > 0) {
+                quizState.currentIndex--;
+                renderQuizQuestion();
+            }
+        }
+
+        function nextQuizQuestion() {
+            if(quizState.userAnswers[quizState.currentIndex] === null) {
+                showToast("يرجى اختيار إجابة قبل الانتقال");
+                return;
+            }
+
+            if(quizState.currentIndex < quizState.questions.length - 1) {
+                quizState.currentIndex++;
+                renderQuizQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            clearInterval(quizState.timerInterval);
+            document.getElementById('active-quiz-area').classList.add('hidden');
+            document.getElementById('quiz-result-card').classList.remove('hidden');
+
+            let score = 0;
+            quizState.questions.forEach((q, i) => {
+                if(quizState.userAnswers[i] === q.correct) score++;
+            });
+
+            const total = quizState.questions.length;
+            document.getElementById('quiz-score-display').innerText = `${score} / ${total}`;
+
+            let msg = "أداء استثنائي وممتاز جداً!";
+            if(score / total < 0.5) msg = "يحتاج إلى مراجعة إضافية للدروس.";
+            document.getElementById('quiz-feedback-msg').innerText = msg;
+
+            state.quizHistory.unshift({
+                date: new Date().toLocaleDateString('ar-SA'),
+                score: `${score}/${total}`,
+                mode: quizState.mode === 'all' ? 'شامل' : 'مخصص'
+            });
+            saveState();
+            renderQuizHistory();
+        }
+
+        function cancelQuiz() {
+            clearInterval(quizState.timerInterval);
+            resetQuizView();
+        }
+
+        function resetQuizView() {
+            document.getElementById('active-quiz-area').classList.add('hidden');
+            document.getElementById('quiz-result-card').classList.add('hidden');
+            document.getElementById('quiz-setup-card').classList.remove('hidden');
+        }
+
+        function renderQuizHistory() {
+            const list = document.getElementById('quiz-history-list');
+            if(state.quizHistory.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-500">لا يوجد سجل اختبارات حتى الآن</p>`;
+                return;
+            }
+            list.innerHTML = state.quizHistory.map(h => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-darkBg/60 border border-gold-500/10">
+                    <span class="text-xs text-gray-400"><i class="fa-solid fa-calendar me-1"></i> ${h.date} (${h.mode})</span>
+                    <span class="font-bold text-gold-400">${h.score}</span>
+                </div>
+            `).join('');
+        }
+
+        /* ==========================================================================
+           6. IDEAS LOGIC
+           ========================================================================== */
+        function renderIdeas() {
+            document.getElementById('mechanical-memory-likes').innerText = state.likesMap['mechanical-memory'] || 42;
+
+            const container = document.getElementById('student-ideas-container');
+            container.innerHTML = state.studentIdeas.map(idea => `
+                <div class="luxury-card p-6 rounded-2xl space-y-4 border border-gold-500/20 flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gold-400 font-bold"><i class="fa-solid fa-user me-1"></i> ${idea.author}</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-gold-500/10 text-gold-400 border border-gold-500/20">فكرة طالب</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">${idea.title}</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed">${idea.desc}</p>
+                    </div>
+                    <div class="pt-3 border-t border-gold-500/10 flex items-center justify-between">
+                        <button onclick="likeIdea('${idea.id}')" class="text-xs font-bold text-gray-400 hover:text-red-400 flex items-center gap-1">
+                            <i class="fa-solid fa-heart text-red-500"></i> إعجاب (<span id="${idea.id}-likes">${idea.likes}</span>)
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleIdeaSubmit(e) {
+            e.preventDefault();
+            const author = document.getElementById('idea-author').value;
+            const title = document.getElementById('idea-title').value;
+            const desc = document.getElementById('idea-desc').value;
+
+            const newIdea = { id: 'idea-' + Date.now(), author, title, desc, likes: 1 };
+            state.studentIdeas.unshift(newIdea);
+            saveState();
+            renderIdeas();
+            document.getElementById('idea-form').reset();
+            showToast("تم نشر فكرتك بنجاح على المنصة!");
+        }
+
+        function likeIdea(id) {
+            if(!state.likesMap[id]) state.likesMap[id] = 0;
+            state.likesMap[id]++;
+
+            if(id === 'mechanical-memory') {
+                document.getElementById('mechanical-memory-likes').innerText = state.likesMap[id];
+            } else {
+                const idea = state.studentIdeas.find(i => i.id === id);
+                if(idea) {
+                    idea.likes++;
+                    document.getElementById(`${id}-likes`).innerText = idea.likes;
+                }
+            }
+            saveState();
+        }
+
+        /* ==========================================================================
+           7. FIVE MINI GAMES LOGIC
+           ========================================================================== */
+        function switchGame(type) {
+            ['math', 'memory', 'cyber', 'order', 'blitz'].forEach(g => {
+                document.getElementById(`game-${g}-container`).classList.add('hidden');
+                document.getElementById(`game-tab-${g}`).className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cardBg text-gray-400 border border-gold-500/20 hover:text-gold-400';
+            });
+
+            document.getElementById(`game-${type}-container`).classList.remove('hidden');
+            document.getElementById(`game-tab-${type}`).className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gold-500/20 text-gold-400 border border-gold-500/40';
+
+            if(type === 'memory') initMemoryGame();
+            if(type === 'cyber') initCyberGame();
+            if(type === 'order') initOrderGame();
+            if(type === 'blitz') initBlitzGame();
+        }
+
+        // Game 1: Math Speed
+        let mathGame = { score: 0, timeLeft: 20, timer: null, currentAns: 0 };
+        function startMathGame() {
+            mathGame.score = 0;
+            mathGame.timeLeft = 20;
+            document.getElementById('math-score').innerText = '0';
+            document.getElementById('math-start-overlay').classList.add('hidden');
+
+            nextMathQuestion();
+            clearInterval(mathGame.timer);
+            mathGame.timer = setInterval(() => {
+                mathGame.timeLeft--;
+                document.getElementById('math-timer').innerText = mathGame.timeLeft;
+                if(mathGame.timeLeft <= 0) {
+                    clearInterval(mathGame.timer);
+                    showToast(`انتهت الجولة! حققت ${mathGame.score} نقطة`);
+                    document.getElementById('math-start-overlay').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function nextMathQuestion() {
+            const num1 = Math.floor(Math.random() * 12) + 2;
+            const num2 = Math.floor(Math.random() * 12) + 2;
+            const isPlus = Math.random() > 0.5;
+
+            mathGame.currentAns = isPlus ? num1 + num2 : num1 * num2;
+            document.getElementById('math-equation').innerText = `${num1} ${isPlus ? '+' : '×'} ${num2}`;
+
+            let opts = [mathGame.currentAns];
+            while(opts.length < 4) {
+                let wrong = mathGame.currentAns + (Math.floor(Math.random() * 10) - 5);
+                if(wrong !== mathGame.currentAns && !opts.includes(wrong) && wrong >= 0) opts.push(wrong);
+            }
+            opts.sort(() => Math.random() - 0.5);
+
+            document.getElementById('math-options').innerHTML = opts.map(o => `
+                <button onclick="checkMathAns(${o})" class="p-4 rounded-2xl bg-darkBg border border-gold-500/30 text-2xl font-black text-white hover:border-gold-400 font-mono">
+                    ${o}
+                </button>
+            `).join('');
+        }
+
+        function checkMathAns(ans) {
+            if(ans === mathGame.currentAns) {
+                mathGame.score += 10;
+            } else {
+                mathGame.score = Math.max(0, mathGame.score - 5);
+            }
+            document.getElementById('math-score').innerText = mathGame.score;
+            nextMathQuestion();
+        }
+
+        // Game 2: Concept Memory
+        const memoryCardsData = [
+            { id: 1, text: 'العدد النسبي', matchId: 1 },
+            { id: 2, text: 'أ / ب', matchId: 1 },
+            { id: 3, text: 'الأمن السيبراني', matchId: 2 },
+            { id: 4, text: 'حماية البيانات', matchId: 2 },
+            { id: 5, text: 'نظرية فيثاغورس', matchId: 3 },
+            { id: 6, text: 'جـ² = أ² + ب²', matchId: 3 },
+            { id: 7, text: 'الهمزة المتوسطة', matchId: 4 },
+            { id: 8, text: 'أقوى الحركات', matchId: 4 }
+        ];
+        let memoryState = { flipped: [], matchedCount: 0, moves: 0 };
+
+        function initMemoryGame() {
+            memoryState = { flipped: [], matchedCount: 0, moves: 0 };
+            document.getElementById('memory-moves').innerText = `المحاولات: 0`;
+
+            const shuffled = [...memoryCardsData].sort(() => Math.random() - 0.5);
+            document.getElementById('memory-grid').innerHTML = shuffled.map((card, idx) => `
+                <div onclick="flipMemoryCard(this, ${card.matchId})" class="memory-card h-24 rounded-xl bg-darkBg border border-gold-500/30 flex items-center justify-center p-2 text-center text-xs font-bold text-gray-400 cursor-pointer hover:border-gold-400 select-none">
+                    <span class="card-inner">?</span>
+                    <span class="card-val hidden text-gold-400">${card.text}</span>
+                </div>
+            `).join('');
+        }
+
+        function flipMemoryCard(el, matchId) {
+            if(memoryState.flipped.length >= 2 || el.classList.contains('matched') || el.classList.contains('open')) return;
+
+            el.classList.add('open', 'border-gold-400', 'bg-gold-500/10');
+            el.querySelector('.card-inner').classList.add('hidden');
+            el.querySelector('.card-val').classList.remove('hidden');
+
+            memoryState.flipped.push({ el, matchId });
+
+            if(memoryState.flipped.length === 2) {
+                memoryState.moves++;
+                document.getElementById('memory-moves').innerText = `المحاولات: ${memoryState.moves}`;
+
+                const [c1, c2] = memoryState.flipped;
+                if(c1.matchId === c2.matchId) {
+                    c1.el.classList.add('matched', 'border-emerald-500');
+                    c2.el.classList.add('matched', 'border-emerald-500');
+                    memoryState.matchedCount += 2;
+                    memoryState.flipped = [];
+                    if(memoryState.matchedCount === memoryCardsData.length) {
+                        setTimeout(() => showToast("أحسنت! أتممت مطابقة جميع الكروت"), 400);
+                    }
+                } else {
+                    setTimeout(() => {
+                        [c1, c2].forEach(c => {
+                            c.el.classList.remove('open', 'border-gold-400', 'bg-gold-500/10');
+                            c.el.querySelector('.card-inner').classList.remove('hidden');
+                            c.el.querySelector('.card-val').classList.add('hidden');
+                        });
+                        memoryState.flipped = [];
+                    }, 900);
+                }
+            }
+        }
+
+        // Game 3: Cyber Word Hunter
+        const cyberPool = [
+            { text: "تشفير البيانات", correct: true },
+            { text: "كلمة مرور قوية", correct: true },
+            { text: "جدار الحماية", correct: true },
+            { text: "التصيد الاحتيالي", correct: true },
+            { text: "المصادقة الثنائية", correct: true },
+            { text: "إرسال الباسورد للغرباء", correct: false },
+            { text: "فتح روابط مجهولة", correct: false },
+            { text: "استخدام 123456", correct: false }
+        ];
+        let cyberScore = 0, cyberFound = 0;
+
+        function initCyberGame() {
+            cyberScore = 0;
+            cyberFound = 0;
+            document.getElementById('cyber-score').innerText = '0';
+            document.getElementById('cyber-count').innerText = '5';
+
+            const shuffled = [...cyberPool].sort(() => Math.random() - 0.5);
+            document.getElementById('cyber-words-grid').innerHTML = shuffled.map((w, i) => `
+                <button onclick="clickCyberWord(this, ${w.correct})" class="p-3.5 rounded-xl bg-darkBg border border-gold-500/30 text-xs font-bold text-white hover:border-gold-400 transition-all">
+                    ${w.text}
+                </button>
+            `).join('');
+        }
+
+        function clickCyberWord(btn, isCorrect) {
+            if(btn.disabled) return;
+            btn.disabled = true;
+
+            if(isCorrect) {
+                btn.className = "p-3.5 rounded-xl bg-emerald-500/20 border-2 border-emerald-500 text-xs font-bold text-emerald-400";
+                cyberScore += 20;
+                cyberFound++;
+                document.getElementById('cyber-score').innerText = cyberScore;
+                document.getElementById('cyber-count').innerText = Math.max(0, 5 - cyberFound);
+                if(cyberFound >= 5) showToast("ممتاز! أتقنت مفاهيم السلامة الرقمية");
+            } else {
+                btn.className = "p-3.5 rounded-xl bg-red-500/20 border-2 border-red-500 text-xs font-bold text-red-400";
+                cyberScore = Math.max(0, cyberScore - 10);
+                document.getElementById('cyber-score').innerText = cyberScore;
+            }
+        }
+
+        // Game 4: Historical Timeline Order
+        let timelineItems = [
+            { id: 1, text: "تأسيس الدولة السعودية الأولى (1139هـ)", order: 1 },
+            { id: 2, text: "صياغة المظاهر الحضارية وتنظيم الدواوين", order: 2 },
+            { id: 3, text: "تأسيس شبكات الاتصال الرقمية الحديثة", order: 3 }
+        ];
+
+        function initOrderGame() {
+            timelineItems.sort(() => Math.random() - 0.5);
+            renderOrderItems();
+        }
+
+        function renderOrderItems() {
+            const list = document.getElementById('order-items-list');
+            list.innerHTML = timelineItems.map((item, idx) => `
+                <div class="flex items-center justify-between p-4 rounded-xl bg-darkBg border border-gold-500/30 text-sm font-bold text-white">
+                    <span>${idx + 1}. ${item.text}</span>
+                    <div class="flex items-center gap-1">
+                        ${idx > 0 ? `<button onclick="moveOrderItem(${idx}, -1)" class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-400 border border-gold-500/20"><i class="fa-solid fa-arrow-up"></i></button>` : ''}
+                        ${idx < timelineItems.length - 1 ? `<button onclick="moveOrderItem(${idx}, 1)" class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-400 border border-gold-500/20"><i class="fa-solid fa-arrow-down"></i></button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function moveOrderItem(idx, dir) {
+            const temp = timelineItems[idx];
+            timelineItems[idx] = timelineItems[idx + dir];
+            timelineItems[idx + dir] = temp;
+            renderOrderItems();
+        }
+
+        function checkOrderResult() {
+            const isCorrect = timelineItems.every((item, i) => i === 0 || item.order >= timelineItems[i - 1].order);
+            if(isCorrect) {
+                showToast("إجابة صحيحة! الترتيب التاريخي صحيح 100%");
+            } else {
+                showToast("الترتيب غير صحيح، أعد المحاولة مرة أخرى");
+            }
+        }
+
+        // Game 5: Trivia Blitz
+        const blitzQuestions = [
+            { q: "ما هي عاصمة الدولة السعودية الأولى؟", opts: ["الدرعية", "الرياض", "جدة", "مكة"], ans: 0 },
+            { q: "من القواعد الأساسية للأمن السيبراني إعداد كلمة مرور:", opts: ["قوية ومعقدة", "بسيطة جداً", "اسمك الثلاثي", "تاريخ الميلاد"], ans: 0 },
+            { q: "نوع الكسر العشري 0.333... هو:", options: ["دوري", "منتهي", "صحيح", "غير نسبي"], ans: 0 }
+        ];
+        let blitzIndex = 0, blitzScore = 0;
+
+        function initBlitzGame() {
+            blitzIndex = 0;
+            blitzScore = 0;
+            document.getElementById('blitz-score').innerText = 'النقاط: 0';
+            renderBlitzQuestion();
+        }
+
+        function renderBlitzQuestion() {
+            if(blitzIndex >= blitzQuestions.length) {
+                document.getElementById('blitz-question-text').innerText = "أحسنت! أنهيت تحدي Trivia Blitz الخاطف بنجاح!";
+                document.getElementById('blitz-options').innerHTML = `
+                    <button onclick="initBlitzGame()" class="luxury-button py-3 rounded-xl font-bold col-span-2">جولة جديدة</button>
+                `;
+                return;
+            }
+
+            const q = blitzQuestions[blitzIndex];
+            document.getElementById('blitz-question-text').innerText = q.q;
+            document.getElementById('blitz-options').innerHTML = (q.opts || q.options).map((opt, i) => `
+                <button onclick="answerBlitz(${i})" class="p-3.5 rounded-xl bg-darkBg border border-gold-500/30 text-sm font-bold text-white hover:border-gold-400">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function answerBlitz(selected) {
+            if(selected === blitzQuestions[blitzIndex].ans) {
+                blitzScore += 15;
+                showToast("إجابة خاطفة صحيحة!");
+            }
+            blitzIndex++;
+            document.getElementById('blitz-score').innerText = `النقاط: ${blitzScore}`;
+            renderBlitzQuestion();
+        }
+
+        /* ==========================================================================
+           8. INITIALIZATION ON LOAD
+           ========================================================================== */
+        window.onload = function() {
+            updateDashboardStats();
+            renderSubjectFilters();
+            renderLessons();
+            initQuizSelectors();
+            renderQuizHistory();
+            renderIdeas();
+        };
+    </script>
+</body>
+</html>
